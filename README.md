@@ -15,11 +15,11 @@ Estudantes que desejam melhorar sua organização de estudos.
 - Marcar tarefas como concluídas
 - Remover tarefas
 - Filtrar tarefas por categoria e status
-- Persistência de dados com localStorage
+- Api
 
 ## 🛠️ Tecnologias utilizadas
-- HTML5
-- CSS3
+- HTML
+- CSS
 - JavaScript
 - localStorage
 
