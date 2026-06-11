@@ -25,7 +25,7 @@ Estudantes que desejam melhorar sua organização de estudos.
 * HTML
 * CSS
 * JavaScript
-* API
+* LocalStorage
 
 ## ▶️ Como executar
 
