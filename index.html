@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schedule Organize</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">📅</span>
+      <span class="logo-text">Schedule</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active" data-page="dashboard">
+        <span class="nav-icon">🏠</span> Dashboard
+      </a>
+      <a href="#" class="nav-item" data-page="activities">
+        <span class="nav-icon">📋</span> Atividades
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="btn-dark-mode" id="btnDarkMode" title="Alternar modo escuro">
+        🌙 Modo escuro
+      </button>
+    </div>
+  </aside>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="main-content">
+
+    <!-- PÁGINA: DASHBOARD -->
+    <section id="page-dashboard" class="page active">
+
+      <div class="page-header">
+        <div>
+          <h1>Olá, estudante! 👋</h1>
+          <p class="page-subtitle" id="currentDate"></p>
+        </div>
+      </div>
+
+      <!-- CLIMA -->
+      <div class="weather-card" id="weatherCard">
+        <div class="weather-loading">Carregando clima...</div>
+      </div>
+
+      <!-- RESUMO -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number" id="statTotal">0</div>
+          <div class="stat-label">Total de atividades</div>
+        </div>
+        <div class="stat-card stat-pending">
+          <div class="stat-number" id="statPending">0</div>
+          <div class="stat-label">Pendentes</div>
+        </div>
+        <div class="stat-card stat-late">
+          <div class="stat-number" id="statLate">0</div>
+          <div class="stat-label">Atrasadas</div>
+        </div>
+        <div class="stat-card stat-done">
+          <div class="stat-number" id="statDone">0</div>
+          <div class="stat-label">Concluídas</div>
+        </div>
+      </div>
+
+      <!-- ATIVIDADES ATRASADAS -->
+      <div class="section-block">
+        <h2 class="section-title">⚠️ Atrasadas</h2>
+        <div id="listLate" class="activity-list">
+          <p class="empty-msg">Nenhuma atividade atrasada. 🎉</p>
+        </div>
+      </div>
+
+      <!-- PRÓXIMOS 7 DIAS -->
+      <div class="section-block">
+        <h2 class="section-title">📆 Próximos 7 dias</h2>
+        <div id="listUpcoming" class="activity-list">
+          <p class="empty-msg">Nenhuma atividade nos próximos 7 dias.</p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PÁGINA: ATIVIDADES -->
+    <section id="page-activities" class="page">
+
+      <div class="page-header">
+        <div>
+          <h1>Minhas Atividades</h1>
+          <p class="page-subtitle">Gerencie todas as suas tarefas acadêmicas</p>
+        </div>
+        <button class="btn-primary" id="btnOpenModal">+ Nova atividade</button>
+      </div>
+
+      <!-- FILTROS E BUSCA -->
+      <div class="filters-bar">
+        <input type="text" class="search-input" id="searchInput" placeholder="🔍 Buscar atividade..." />
+
+        <select class="filter-select" id="filterType">
+          <option value="">Todos os tipos</option>
+          <option value="prova">Prova</option>
+          <option value="trabalho">Trabalho</option>
+          <option value="atividade">Atividade</option>
+          <option value="apresentacao">Apresentação</option>
+        </select>
+
+        <select class="filter-select" id="filterDiscipline">
+          <option value="">Todas as disciplinas</option>
+        </select>
+
+        <select class="filter-select" id="filterStatus">
+          <option value="">Todos os status</option>
+          <option value="pendente">Pendentes</option>
+          <option value="concluida">Concluídas</option>
+          <option value="atrasada">Atrasadas</option>
+        </select>
+      </div>
+
+      <div id="listAll" class="activity-list"></div>
+
+    </section>
+
+  </main>
+
+  <!-- MODAL: CADASTRO / EDIÇÃO -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Nova Atividade</h2>
+        <button class="modal-close" id="btnCloseModal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="inputTitle">Título *</label>
+          <input type="text" id="inputTitle" placeholder="Ex: Prova de Cálculo I" />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputDiscipline">Disciplina *</label>
+            <input type="text" id="inputDiscipline" placeholder="Ex: Cálculo I" />
+          </div>
+          <div class="form-group">
+            <label for="inputType">Tipo *</label>
+            <select id="inputType">
+              <option value="">Selecione...</option>
+              <option value="prova">Prova</option>
+              <option value="trabalho">Trabalho</option>
+              <option value="atividade">Atividade</option>
+              <option value="apresentacao">Apresentação</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="inputDate">Data *</label>
+            <input type="date" id="inputDate" />
+          </div>
+          <div class="form-group">
+            <label for="inputTime">Horário</label>
+            <input type="time" id="inputTime" />
+          </div>
+        </div>
+
+        <p class="form-error" id="formError"></p>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-secondary" id="btnCancelModal">Cancelar</button>
+        <button class="btn-primary" id="btnSaveActivity">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="javascript/storage.js"></script>
+  <script src="javascript/weather.js"></script>
+  <script src="javascript/app.js"></script>
+</body>
+</html>
